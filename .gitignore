@@ -1,0 +1,7 @@
+# Infrastructure data (never push)
+qdrant_data/
+redis_data/
+comfyui-native/output/
+comfyui-native/input/
+comfyui-native/models/
+comfyui-native/custom_nodes/

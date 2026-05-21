@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  # ── Memory Store ──
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - ./qdrant_data:/qdrant/storage
+    restart: unless-stopped
+    networks:
+      - pentagon-net
+
+  # ── Cache / Queue ──
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis_data:/data
+    restart: unless-stopped
+    networks:
+      - pentagon-net
+
+  # ── Image Generation (CPU mode) ──
+  comfyui:
+    build:
+      context: ./comfyui-native
+    container_name: comfyui
+    ports:
+      - "8188:8188"
+    volumes:
+      - ./comfyui-native/output:/workspace/ComfyUI/output
+      - ./comfyui-native/input:/workspace/ComfyUI/input
+      - ./comfyui-native/models:/workspace/ComfyUI/models
+      - ./comfyui-native/custom_nodes:/workspace/ComfyUI/custom_nodes
+      - ./comfyui-native/user:/workspace/ComfyUI/user
+    environment:
+      - CLI_ARGS=--cpu --listen 0.0.0.0
+    restart: unless-stopped
+    networks:
+      - pentagon-net
+
+networks:
+  pentagon-net:
+    driver: bridge
