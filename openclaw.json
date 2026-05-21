@@ -3,7 +3,7 @@
     "defaults": {
       "workspace": "/home/jason2ykk/.openclaw/workspace",
       "compaction": {
-        "model": "ollama/qwen3.5:9b",
+        "model": "deepseek/deepseek-v4-flash",
         "reserveTokensFloor": 8000
       },
       "models": {
