@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "channels": {
+    "webchat": {
+      "enabled": true,
+      "mode": "interactive",
+      "description": "OpenClaw Control UI — direct session"
+    },
+    "telegram": {
+      "enabled": true,
+      "mode": "push",
+      "pairing_required": true,
+      "description": "Mobile alerts via Telegram bot"
+    },
+    "github_issues": {
+      "enabled": true,
+      "repositories": ["kongyoongkeong-lab/openclaw-workspace"],
+      "description": "Incident and audit logging via GitHub Issues"
+    },
+    "slack": {
+      "enabled": false,
+      "mode": "webhook",
+      "description": "Optional log streaming"
+    }
+  },
+  "comms": {
+    "pulse_frequency_hours": 4,
+    "report_format": "markdown",
+    "github_status_enabled": true,
+    "health_check_enabled": true
+  }
+}
